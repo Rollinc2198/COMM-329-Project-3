@@ -1,4 +1,194 @@
 /*-- Global Styles --*/
 :root {
+  --prime: #222;
+  --text: #333;
+  --rev-text: #EEE;
+  --accent: #2E9CCA;
+  --bg: #EEE;
 }
 /*-- Document Styles --*/
+.topnav { /*-- main navigation element --*/
+  margin-top: -.25rem;
+  padding-bottom: .5rem;
+  background-color: var(--prime);
+  display: flex; /*-- creates a flex container --*/
+  justify-content: space-around; /*-- lays out menu items--*/
+  align-items: center; /*-- sets menu items to fill space vertically --*/
+  align-content: center; /*-- vertically aligns menu items to center --*/
+  position: fixed; /*-- makes the navbar stay at the top, even when scrolling--*/
+  z-index: 1000; /*-- makes navbar always sit on top--*/
+  width: 100%; /*-- makes navbar occupy full width of the page --*/
+  /* flex-direction: row; */
+}
+a.nav-item {
+  position: relative;
+  top: 4px; /*-- tweaks vertical position --*/
+  text-align: center; /*-- center-aligns all text inside their boxes --*/
+  padding: .75em; /*-- provides padding inside menu items --*/
+  margin: auto 0; /*-- centers menu text vertically --*/
+  color: var(--rev-text);
+  transition: color 250ms ease-in-out; /*-- specifies transition, duration, and easing --*/
+}
+a.nav-item:hover {
+  color: var(--accent);
+  cursor: pointer; /*-- changes menu items to pointer on hover --*/
+}
+.label {
+  font-size: 1rem;
+}
+.nav-item.trigram {
+  display: none; /*-- hides trigram (hamburger menu button) by default --*/
+  text-decoration: none; /*-- removes underline --*/
+  font-size: 2rem; /*-- makes much larger than normal text--*/
+}
+
+.slideshow {
+  background-color: var(--bg);
+  padding: 1em;
+}
+.slideshow-wrapper {
+  position: relative; /*-- this allows children to be position absolutely --*/
+  margin: auto; /*-- simple centering method--*/
+  margin-top: 2em; /*-- adds space above--*/
+  max-width: 1440px; /*-- contrains slideshow on largest screens --*/
+}
+.slideshow-wrapper img {
+  width: 100%; /*-- makes slideshow responsive in size --*/
+}
+.prev, .next {
+  cursor: pointer; /*-- changes hover cursor to the hand --*/
+  position: absolute; /*-- positions arrows absolutely--*/
+  top: 50%; /*-- positions arrows half the height of parent from top --*/
+  width: auto; /*-- matches width of parent --*/
+  padding: 16px; /*-- adds a little bit of space--*/
+  margin-top: -22px; /*-- adjusts position by height of arrows --*/
+  color: white; /*-- sets color for contrast --*/
+  font-weight: bold; /*-- selects heavier font --*/
+  font-size: 18px; /*-- sets arrow font size --*/
+  transition: 0.6s ease; /*-- sets transition speed for arrow hover--*/
+  border-radius: 0 3px 3px 0; /*-- slightly rounds inside borders --*/
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; /*-- prevents users from selecting buttons --*/
+}
+.next {
+  right: 0; /*-- positions next arrow hard right --*/
+  border-radius: 3px 0 0 3px; /*-- rounds the outside borders --*/
+}
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8); /*-- gives a background for contrast on hover --*/
+}
+.text-center {
+  text-align: center; /*-- aligns indicators center --*/
+}
+.captiontext {
+  background: rgba(0,0,0,0.4); /*-- transparent black background --*/
+  color: #f2f2f2; /*-- sets color to almost white --*/
+  font-size: 22px; /*-- sets font size --*/
+  padding: 8px 12px; /*-- sets caption padding --*/
+  position: absolute; /*-- positions caption text absolutely--*/
+  bottom: 8px; /*-- sets position 8px from bottom --*/
+  width: 100%; /*-- sets width equal to container width --*/
+  text-align: center; /*-- aligns text center --*/
+}
+.indicator {
+  cursor:pointer; /*-- changes hover cursor to the hand --*/
+  height: auto; /*-- sets height of pics --*/
+  width: 24%; /*-- sets width of pics --*/
+  margin: 0 2px; /*-- adds margin between pics --*/
+  background-color: #bbb; /*-- sets background color to light gray --*/
+  display: inline-block; /*-- displays in a horizontal line --*/
+  transition: all 250ms ease-in-out; /*-- allows opacity change to take time --*/
+  opacity: .5;
+}
+.indicator img {
+  width: 100% !important; /*-- small images fill available space --*/
+}
+.active, .indicator:hover {
+  opacity: 1; /*-- makes fully visible when hovered  --*/
+}
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade; /*-- webkit prefix  --*/
+  -webkit-animation-duration: 1.5s; /*-- webkit prefix --*/
+  animation-name: fade; /*-- defines which animation to use --*/
+  animation-duration: 1.5s; /*-- sets the duration --*/
+}
+@-webkit-keyframes fade { /*-- webkit prefix --*/
+  from {opacity: .4}
+  to {opacity: 1}
+}
+@keyframes fade { /*-- sets "fade" animation properties --*/
+  from {opacity: .4} /*-- sets start of animation --*/
+  to {opacity: 1} /*-- sets end of animation --*/
+}
+/* On smaller screens, hides slideshow */
+@media only screen and (max-width: 767px) {
+  .slideshow {display: none;}
+}
+.modal {
+   display: none;/*-- hidden by default --*/
+   position: fixed; /*-- doesn't move on the screen --*/
+   z-index: 1100; /*-- sets higher than anything else so modal is in the very front --*/
+   left: 0; /*-- positions at zero pixels from the left --*/
+   top: 0; /*-- positions at zero pixels from the top --*/
+   width: 100%; /*-- fills the space --*/
+   height: 100%; /*-- fills the space --*/
+   overflow: auto; /*-- handles overflow as normal. --*/
+   background-color: rgba(10, 10, 10, 0.85); /*--slightly transparent--*/
+}
+.modal-content {
+   background-color: var(--bg);
+   color: var(--text);
+   margin: 1rem auto;
+   padding: 1em;
+   width: 92%;
+   border-radius: 4px;
+   animation: fadein .3s ease-in-out; /*-- sets animation properties: name, duration, easing --*/
+}
+@keyframes fadein {
+  from{transform:scale(.1);} /*-- modal grows from very small to full size--*/
+}
+
+@media screen and (max-width: 767px) {
+  .topnav {
+    flex-direction: column;
+  }
+  .topnav a, .topnav span {
+    display: none;
+  }
+  .topnav a.trigram {
+    display: inherit;
+    position: absolute;
+    right: 4%;
+    font-size: 2em;
+    padding: .25em;
+    background: var(--prime);
+  }
+  .topnav.responsive {
+    align-items: center;
+  } /*-- vertically centers--*/
+  .topnav.responsive a, .topnav.responsive span {
+    display: inherit;
+  } /*-- makes trigram visible --*/
+  .topnav.responsive a:first-child {
+    margin-top: 1em;
+  } /*-- adds space above first item --*/
+  .topnav.responsive a:not(:last-child) {
+    display: inherit;
+    padding-top: 1em;
+  } /*-- makes items visible (but not the trigram) and adds space above them--*/
+  .topnav.responsive a.more {
+    margin-bottom: 1em;
+  } /*-- adds margin below bottom item --*/
+  .topnav.responsive a.trigram {
+    visibility: hidden;
+    transition: none;
+  } /*-- hides trigram when open --*/
+  .topnav.responsive a.trigram:after {
+    content:'\000D7';
+    visibility: visible;
+    text-indent: -.5em;
+  } /*-- replaces trigram sign with x-sign on mobile. --*/
+}
