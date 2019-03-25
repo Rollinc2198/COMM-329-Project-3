@@ -71,6 +71,7 @@ a.nav-item:hover {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none; /*-- prevents users from selecting buttons --*/
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .next {
   right: 0; /*-- positions next arrow hard right --*/
@@ -81,16 +82,6 @@ a.nav-item:hover {
 }
 .text-center {
   text-align: center; /*-- aligns indicators center --*/
-}
-.captiontext {
-  background: rgba(0,0,0,0.4); /*-- transparent black background --*/
-  color: #f2f2f2; /*-- sets color to almost white --*/
-  font-size: 22px; /*-- sets font size --*/
-  padding: 8px 12px; /*-- sets caption padding --*/
-  position: absolute; /*-- positions caption text absolutely--*/
-  bottom: 8px; /*-- sets position 8px from bottom --*/
-  width: 100%; /*-- sets width equal to container width --*/
-  text-align: center; /*-- aligns text center --*/
 }
 .indicator {
   cursor:pointer; /*-- changes hover cursor to the hand --*/

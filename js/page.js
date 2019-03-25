@@ -1,14 +1,22 @@
 //* Page Scripts
 function init() {
-  var slides = document.getElementsByClassName("slide"); // targets slides
-  var indicator = document.getElementsByClassName("indicator"); //targets indicators
-  var r = Math.floor((Math.random() * 1000) + 1);
-  
+  var slides = document.getElementsByClassName("slide_img"); // targets slides
+  var indicators = document.getElementsByClassName("indicator_img"); //targets indicators
+  var captions = document.getElementsByClassName("captiontext"); //targets indicators
+  var r = Math.floor((Math.random() * 1000));
+  for (i = 0; i < slides.length; i++) {
+    slides[i].src = `https://picsum.photos/1280/448/?image=${r + i}`;
+    indicators[i].src = `https://picsum.photos/1280/448/?image=${r + i}`;
+    // captiontext[i].innerHTML = `Author: ` ${data.i.author};
+  }
+  setInterval(function(){
+    plusSlides(1);
+  }, 5000);
 }
 
 function navToggle() {
   var x = document.getElementById("main-nav");
-    if (x.className === "topnav") {
+  if (x.className === "topnav") {
     x.className += " responsive";
   } else {
     x.className = "topnav";
