@@ -6,19 +6,25 @@
   --accent: #2E9CCA;
   --bg: #EEE;
 }
+body { /*-- Sets body defaults --*/
+  padding: .25rem;
+  font-size: 16px;
+  color: var(--text);
+  background-color: var(--prime);
+}
 /*-- Document Styles --*/
 .topnav { /*-- main navigation element --*/
-  margin-top: -.25rem;
-  padding-bottom: .5rem;
+  margin-top: -.25rem; /*-- uses negative margin to pull menu to top --*/
+  padding-bottom: .5rem; /*-- creates a little space below nav --*/
   background-color: var(--prime);
   display: flex; /*-- creates a flex container --*/
+  flex-direction: column; /*-- direction is for MOBILE screen sizes --*/
   justify-content: space-around; /*-- lays out menu items--*/
-  align-items: center; /*-- sets menu items to fill space vertically --*/
+  align-items: stretch; /*-- sets menu items to fill space vertically --*/
   align-content: center; /*-- vertically aligns menu items to center --*/
   position: fixed; /*-- makes the navbar stay at the top, even when scrolling--*/
   z-index: 1000; /*-- makes navbar always sit on top--*/
   width: 100%; /*-- makes navbar occupy full width of the page --*/
-  /* flex-direction: row; */
 }
 a.nav-item {
   position: relative;
@@ -40,6 +46,24 @@ a.nav-item:hover {
   display: none; /*-- hides trigram (hamburger menu button) by default --*/
   text-decoration: none; /*-- removes underline --*/
   font-size: 2rem; /*-- makes much larger than normal text--*/
+}
+@media screen and (max-width: 767px) {
+  .topnav a, .topnav span {display: none;}
+  .topnav a.trigram {display:inherit; position:absolute; right:4%; font-size:2em; padding: .25em; background:var(--prime);}
+}
+/*-- At screens BELOW 768px,  rules for mobile nav--*/
+@media screen and (max-width: 767px) {
+  .topnav.responsive {align-items: center;} /*-- vertically centers--*/
+  .topnav.responsive a, .topnav.responsive span {display:inherit;} /*-- makes trigram visible --*/
+  .topnav.responsive a:first-child {margin-top:1em;} /*-- adds space above first item --*/
+  .topnav.responsive a:not(:last-child) {display:inherit; padding-top:1em;} /*-- makes items visible (but not the trigram) and adds space above them--*/
+  .topnav.responsive a.more {margin-bottom: 1em;} /*-- adds margin below bottom item --*/
+  .topnav.responsive a.trigram {visibility:hidden; transition:none;} /*-- hides trigram when open --*/
+  .topnav.responsive a.trigram:after {content:'\000D7'; visibility:visible; text-indent: -.5em;} /*-- replaces trigram sign with x-sign on mobile. --*/
+}
+/*-- At screens 768px and ABOVE, set normal menu defaults --*/
+@media screen and (min-width: 768px) {
+  .topnav {display: flex; flex-direction: row; justify-content: space-around;}
 }
 
 .slideshow {
@@ -118,6 +142,88 @@ a.nav-item:hover {
 @media only screen and (max-width: 767px) {
   .slideshow {display: none;}
 }
+.main-grid {
+  margin-top: 3.5rem; /*-- adds space above grid wrap --*/
+  padding: .5rem; /*-- adds padding inside grid wrap --*/
+  display: grid; /*-- sets display mode --*/
+  grid-gap: 1.5rem; /*-- creates gutters --*/
+  grid-template-columns: 1fr; /*-- default mobile layout is 1-column--*/
+}
+/*-- grid media queries--*/
+@media screen and (min-width: 550px) { /*-- at screens between 550 and 767 --*/
+  .main-grid {grid-template-columns: repeat(2, 1fr);}  /*-- 2 columnns --*/
+}
+@media screen and (min-width: 768px) {/*-- at screens between 768 and 989 --*/
+  .main-grid {grid-template-columns: repeat(3, 1fr);} /*-- 3 columnns --*/
+}
+@media screen and (min-width: 990px) {/*-- at screens between 990 and 1271 --*/
+  .main-grid {grid-template-columns: repeat(4, 1fr);} /*-- 4 columnns --*/
+}
+@media screen and (min-width: 1280px) {/*-- at screens 1280 and above --*/
+  .main-grid {grid-template-columns: repeat(4, 1fr);} /*-- 4 columnns --*/
+}
+/*-- media card styles -- */
+.main-grid-item {
+  border-radius: 4px;  /*-- rounds borders --*/
+  padding: .5em; /*-- adds space inside --*/
+  background-color: var(--bg);
+}
+.thumb {
+  padding-bottom: 56%; /*-- creates ~16:9 ratio--*/
+  background-size: cover; /*--sets image to cover background --*/
+  background-position: center center; /*-- positions image horiz. and vert. center --*/
+  border-radius: 4px 4px 0 0; /*-- rounds top-left and top-right edges --*/
+}
+/*-- Card Backgrounds --*/
+.one .thumb {background-image: url('https://picsum.photos/300/200/?image=09');}
+.two .thumb {background-image: url('https://picsum.photos/300/200/?image=24');}
+.three .thumb {background-image: url('https://picsum.photos/300/200/?image=35');}
+.four .thumb {background-image: url('https://picsum.photos/300/200/?image=44');}
+.five .thumb {background-image: url('https://picsum.photos/300/200/?image=54');}
+.six .thumb {background-image: url('https://picsum.photos/300/200/?image=59');}
+.seven .thumb {background-image: url('https://picsum.photos/300/200/?image=71');}
+.eight .thumb {background-image: url('https://picsum.photos/300/200/?image=32');}
+.nine .thumb {background-image: url('https://picsum.photos/300/200/?image=19');}
+.ten .thumb {background-image: url('https://picsum.photos/300/200/?image=06');}
+.eleven .thumb {background-image: url('https://picsum.photos/300/200/?image=23');}
+.twelve .thumb {background-image: url('https://picsum.photos/300/200/?image=60');}
+/*----*/
+.card-content {
+  padding: 0 .5em .7em .5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /*-- vertically centers card content --*/
+}
+.card-title {
+  margin: 1rem 0 0 0;
+  text-transform: uppercase; /*--all caps text --*/
+  align-self: flex-start; /*-- positions at beginning --*/
+  color: var(--text);
+}
+.card-text {
+  font-size: .80em;
+  line-height: 1.2;
+  align-self: flex-start;
+  color: var(--text);
+}
+button.card-more {
+  background: transparent;
+  padding: .45em .7em .4em .7em;
+  border-radius: 200px;
+  font-size: .7em;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+button.card-more, button.card-more:visited {
+  color: var(--prime);
+  border: 1.5px solid var(--prime);
+  transition: all 250ms ease-in-out;
+}
+button.card-more:hover, button.card-more:active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
 .modal {
    display: none;/*-- hidden by default --*/
    position: fixed; /*-- doesn't move on the screen --*/
@@ -141,11 +247,49 @@ a.nav-item:hover {
 @keyframes fadein {
   from{transform:scale(.1);} /*-- modal grows from very small to full size--*/
 }
+.close {
+   color: var(--text);
+   font-size: 2.5em;
+   font-weight: bold;
+   position: absolute; /*-- always at the top right of the modal --*/
+   top: 5px;
+   right: 4.25%;
+   transition: all .2s ease-in;
+   text-shadow: 2px 2px 5px #FAFAFA,
+               -2px -2px 5px #FAFAFA,
+               2px -2px 5px #FAFAFA,
+               -2px 2px 5px #FAFAFA;
+}
+.close:hover,
+.close:focus {
+   color: var(--accent);
+   text-decoration: none;
+   cursor: pointer;
+}
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr; /*-- default modal grid (for mobile screens)--*/
+  grid-gap: 2em;
+}
+.eg-text {
+  align-self: center;
+}
+.eg-text h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+.modal-body img {
+  margin-bottom: 1.5em;
+  width: 100%;
+  height: auto;
+}
+@media screen and (min-width: 1280px) { /*-- better modal display on largest screens --*/
+  .modal-body {
+    grid-template-columns: 7fr 5fr;
+  }
+}
 
 @media screen and (max-width: 767px) {
-  .topnav {
-    flex-direction: column;
-  }
   .topnav a, .topnav span {
     display: none;
   }
@@ -182,4 +326,16 @@ a.nav-item:hover {
     visibility: visible;
     text-indent: -.5em;
   } /*-- replaces trigram sign with x-sign on mobile. --*/
+}
+footer {
+  background-color: var(--prime);
+  padding: .25rem;
+  color: var(--rev-text);
+  text-align: center;
+}
+footer a {
+  color: var(--rev-text);
+}
+footer a:hover {
+  color: var(--rev-accent);
 }
